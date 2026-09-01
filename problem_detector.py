@@ -339,7 +339,7 @@ def print_problems(problems):
 
 if __name__ == "__main__":
 
-    file_path = "heart.csv"
+    file_path = "cleaned_heart.csv"
 
     try:
 

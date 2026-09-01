@@ -1,0 +1,57 @@
+{
+    "before": {
+        "rows": 918,
+        "columns": 12,
+        "missing_values": 0,
+        "duplicate_rows": 0,
+        "outliers": 229,
+        "invalid_values": 0
+    },
+    "after": {
+        "rows": 918,
+        "columns": 16,
+        "missing_values": 0,
+        "duplicate_rows": 0,
+        "outliers": 229,
+        "invalid_values": 0
+    },
+    "quality_score": {
+        "before": 99.25,
+        "after": 99.25,
+        "change": 0.0
+    },
+    "comparison": {
+        "rows": {
+            "before": 918,
+            "after": 918,
+            "change": 0
+        },
+        "columns": {
+            "before": 12,
+            "after": 16,
+            "change": 4
+        },
+        "missing_values": {
+            "before": 0,
+            "after": 0,
+            "change": 0
+        },
+        "duplicate_rows": {
+            "before": 0,
+            "after": 0,
+            "change": 0
+        },
+        "outliers": {
+            "before": 229,
+            "after": 229,
+            "change": 0
+        },
+        "invalid_values": {
+            "before": 0,
+            "after": 0,
+            "change": 0
+        }
+    },
+    "decision": "ACCEPT",
+    "reason": "4 diagnostic columns were added without removing any data."
+}

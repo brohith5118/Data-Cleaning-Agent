@@ -1,0 +1,39 @@
+[
+    {
+        "operation": "flag_outliers",
+        "column": "RestingBP",
+        "flag_column": "RestingBP_outlier",
+        "rows_affected": 28,
+        "lower_bound": 90.0,
+        "upper_bound": 170.0
+    },
+    {
+        "operation": "flag_outliers",
+        "column": "Cholesterol",
+        "flag_column": "Cholesterol_outlier",
+        "rows_affected": 183,
+        "lower_bound": 32.625,
+        "upper_bound": 407.625
+    },
+    {
+        "operation": "no_action",
+        "column": "FastingBS",
+        "rows_affected": 0
+    },
+    {
+        "operation": "flag_outliers",
+        "column": "MaxHR",
+        "flag_column": "MaxHR_outlier",
+        "rows_affected": 2,
+        "lower_bound": 66.0,
+        "upper_bound": 210.0
+    },
+    {
+        "operation": "flag_outliers",
+        "column": "Oldpeak",
+        "flag_column": "Oldpeak_outlier",
+        "rows_affected": 16,
+        "lower_bound": -2.25,
+        "upper_bound": 3.75
+    }
+]

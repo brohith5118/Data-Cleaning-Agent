@@ -127,6 +127,19 @@ def generate_cleaning_plan(profile, problems):
 def print_cleaning_plan(result):
 
     try:
+        # Remove Markdown code fences if Gemini adds them
+        result = result.strip()
+
+        if result.startswith("```json"):
+            result = result[7:]
+
+        elif result.startswith("```"):
+            result = result[3:]
+
+        if result.endswith("```"):
+            result = result[:-3]
+
+        result = result.strip()
 
         plan = json.loads(result)
 
@@ -136,70 +149,50 @@ def print_cleaning_plan(result):
         print("=" * 70)
 
         print("\nSummary:")
-        print(
-            plan.get(
-                "summary",
-                "No summary"
-            )
-        )
+        print(plan.get("summary", "No summary"))
 
         print("\nOverall Risk:")
-        print(
-            plan.get(
-                "overall_risk",
-                "Unknown"
-            )
-        )
-
-        cleaning_plan = plan.get(
-            "cleaning_plan",
-            []
-        )
+        print(plan.get("overall_risk", "Unknown"))
 
         print("\nRecommended Actions:")
         print("-" * 70)
 
-        if not cleaning_plan:
-
-            print("No cleaning actions recommended.")
-
         for i, action in enumerate(
-            cleaning_plan,
+            plan.get("cleaning_plan", []),
             start=1
         ):
 
             print(f"\nAction {i}")
-
-            print(
-                f"  Problem   : "
-                f"{action.get('problem_type')}"
-            )
-
-            print(
-                f"  Column    : "
-                f"{action.get('column')}"
-            )
-
-            print(
-                f"  Operation : "
-                f"{action.get('operation')}"
-            )
-
-            print(
-                f"  Reason    : "
-                f"{action.get('reason')}"
-            )
-
-            print(
-                f"  Confidence: "
-                f"{action.get('confidence')}"
-            )
+            print(f"  Problem   : {action.get('problem_type')}")
+            print(f"  Column    : {action.get('column')}")
+            print(f"  Operation : {action.get('operation')}")
+            print(f"  Reason    : {action.get('reason')}")
+            print(f"  Confidence: {action.get('confidence')}")
 
     except json.JSONDecodeError:
-
         print("\nGemini returned invalid JSON:")
         print(result)
 
+def save_cleaning_plan(result, filename="cleaning_plan.json"):
+
+    result = result.strip()
+
+    if result.startswith("```json"):
+        result = result[7:]
+    elif result.startswith("```"):
+        result = result[3:]
+
+    if result.endswith("```"):
+        result = result[:-3]
+
+    result = result.strip()
+
+    plan = json.loads(result)
+
+    with open(filename, "w", encoding="utf-8") as file:
+        json.dump(plan, file, indent=4)
+
+    print(f"\nCleaning plan saved to {filename}")
 
 # ============================================================
 # MAIN
@@ -261,7 +254,8 @@ if __name__ == "__main__":
 
         # Display result
         print_cleaning_plan(result)
-
+        
+        save_cleaning_plan(result)
     except Exception as e:
 
         print(
